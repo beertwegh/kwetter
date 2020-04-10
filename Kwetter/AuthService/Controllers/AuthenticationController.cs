@@ -18,6 +18,7 @@ namespace AuthService.Controllers
             _authService = authService;
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Authenticate([FromBody] AuthUser authUser)
         {

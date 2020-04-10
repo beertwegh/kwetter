@@ -9,17 +9,6 @@ namespace AuthService.DbContext
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AuthUser>().HasData(
-                new AuthUser
-                {
-                    UserId = 1,
-                    Username = "bas",
-                    Password = "test123"
-                }
-            );
-        }
         #region DbSets
 
         public DbSet<AuthUser> AuthUsers { get; set; }

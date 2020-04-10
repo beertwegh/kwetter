@@ -17,6 +17,12 @@ namespace AuthService.Repository
         public AuthenticationRepository(AuthContext authContext)
         {
             _authContext = authContext;
+            authContext.AuthUsers.Add(new AuthUser
+            {
+                Username = "bas",
+                Password = "test123"
+            });
+            authContext.SaveChanges();
         }
 
         public async Task<AuthUser> ValidateAuthUser(string authUserUsername, string password)

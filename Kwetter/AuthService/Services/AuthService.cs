@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AuthService.Models;
+using AuthService.Repository.Interface;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using AuthService.Helpers;
-using AuthService.Models;
-using AuthService.Repository.Interface;
-using Microsoft.IdentityModel.Tokens;
+
 namespace AuthService.Services
 {
     public class AuthService : IAuthService
     {
         private readonly IAuthenticationRepository _authRepo;
-        private readonly AppSettings _appSettings;
-        public AuthService(IAuthenticationRepository authRepo, AppSettings appSettings)
+        private readonly IConfiguration _configuration;
+        public AuthService(IAuthenticationRepository authRepo, IConfiguration configuration)
         {
             _authRepo = authRepo;
-            _appSettings = appSettings;
+            this._configuration = configuration;
         }
 
         public async Task<string> Authenticate(AuthUser authUser)
@@ -31,9 +30,11 @@ namespace AuthService.Services
 
             // authentication successful so generate jwt token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var secret = _configuration.GetValue<string>("AppSettings:Secret");
+            var key = Encoding.ASCII.GetBytes(secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
+                
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.UserId.ToString())
