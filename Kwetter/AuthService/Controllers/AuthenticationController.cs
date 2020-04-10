@@ -27,7 +27,5 @@ namespace AuthService.Controllers
                 return Unauthorized();
             return Ok(token);
         }
-        //[HttpPost("/register")]
-        //public async Task<IActionResult> 
     }
 }
