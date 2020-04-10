@@ -9,6 +9,12 @@ namespace AuthService.DbContext
         {
 
         }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AuthUser>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
+        }
         #region DbSets
 
         public DbSet<AuthUser> AuthUsers { get; set; }

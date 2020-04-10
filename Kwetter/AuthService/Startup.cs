@@ -32,7 +32,7 @@ namespace AuthService
             services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"));
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 
-      
+
             services.AddCors();
 
 
@@ -72,7 +72,7 @@ namespace AuthService
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
