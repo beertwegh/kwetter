@@ -10,5 +10,7 @@ namespace AuthService.Services
     public interface IAuthService
     {
         Task<string> Authenticate(AuthUser authUser);
+        bool ValidateToken(string token);
+        string GetClaim(string token, string claimType);
     }
 }
