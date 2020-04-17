@@ -51,6 +51,7 @@ namespace OcelotAPIGateway
                         ValidateAudience = false
                     };
                 });
+            services.AddCors();
             services.AddOcelot(Configuration);
         }
 
@@ -65,6 +66,7 @@ namespace OcelotAPIGateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
 
             app.UseAuthorization();
           
