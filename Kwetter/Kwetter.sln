@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageService", "MessageSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{C23089D4-35F4-455F-92AA-37A2A498AFF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthService", "AuthService\AuthService.csproj", "{62BAC106-5287-414A-99CA-D075C2E70E9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthService", "AuthService\AuthService.csproj", "{62BAC106-5287-414A-99CA-D075C2E70E9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileService", "ProfileService\ProfileService.csproj", "{3D17E646-B1B1-4EA0-8A38-8CB2C7BCCF2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileService", "ProfileService\ProfileService.csproj", "{3D17E646-B1B1-4EA0-8A38-8CB2C7BCCF2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotAPIGateway", "OcelotAPIGateway\OcelotAPIGateway.csproj", "{71A0A70D-5E60-4178-83BD-D6275AD60779}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3D17E646-B1B1-4EA0-8A38-8CB2C7BCCF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D17E646-B1B1-4EA0-8A38-8CB2C7BCCF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D17E646-B1B1-4EA0-8A38-8CB2C7BCCF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71A0A70D-5E60-4178-83BD-D6275AD60779}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71A0A70D-5E60-4178-83BD-D6275AD60779}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71A0A70D-5E60-4178-83BD-D6275AD60779}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71A0A70D-5E60-4178-83BD-D6275AD60779}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
