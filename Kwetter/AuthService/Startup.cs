@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AuthService.Helpers;
 using AuthService.Models;
 
 namespace AuthService
@@ -58,10 +59,11 @@ namespace AuthService
                 });
             // configure DI for application services
             services.AddScoped<IAuthService, Services.AuthService>();
+            services.AddScoped<IRpcServer, RpcServer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRpcServer server)
         {
             if (env.IsDevelopment())
             {
@@ -69,7 +71,6 @@ namespace AuthService
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
             app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
             app.UseAuthorization();
@@ -78,6 +79,7 @@ namespace AuthService
             {
                 endpoints.MapControllers();
             });
+            
         }
     }
 }

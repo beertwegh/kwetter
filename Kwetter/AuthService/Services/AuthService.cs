@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AuthService.Helpers;
 
 namespace AuthService.Services
 {
@@ -15,6 +16,7 @@ namespace AuthService.Services
     {
         private readonly IAuthenticationRepository _authRepo;
         private readonly IConfiguration _configuration;
+        
         public AuthService(IAuthenticationRepository authRepo, IConfiguration configuration)
         {
             _authRepo = authRepo;
@@ -38,7 +40,7 @@ namespace AuthService.Services
                 
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim("userId", user.UserId.ToString())
+                    new Claim(Globals.UserIdClaim, user.UserId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -68,7 +70,7 @@ namespace AuthService.Services
             }
             return true;
         }
-        public string GetClaim(string token, string claimType)
+        public string GetClaim(string token, string claimType = Globals.UserIdClaim)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.ReadToken(token) as JwtSecurityToken;
