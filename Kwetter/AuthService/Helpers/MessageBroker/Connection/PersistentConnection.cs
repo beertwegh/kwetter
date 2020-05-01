@@ -9,7 +9,7 @@ namespace AuthService.Helpers.MessageBroker.Connection
 
         public PersistentConnection()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+            var factory = new ConnectionFactory() { HostName = "localhost"};
             Connection = factory.CreateConnection();
             Channel = Connection.CreateModel();
         }

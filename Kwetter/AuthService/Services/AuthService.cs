@@ -79,11 +79,11 @@ namespace AuthService.Services
             return stringClaimValue;
         }
 
-        public async Task UserRegistered(AuthUser user)
+        public void UserRegistered(AuthUser user)
         {
             if (user.IsValid)
             {
-                await _authRepo.SaveNewUser(user);
+                _authRepo.SaveNewUser(user);
             }
         }
     }

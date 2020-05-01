@@ -13,6 +13,6 @@ namespace AuthService.Repository.Interface
 
         Task<AuthUser> ValidateAuthUser(string authUserUsername, string password);
 
-    Task SaveNewUser(AuthUser user);
+    void SaveNewUser(AuthUser user);
     }
 }

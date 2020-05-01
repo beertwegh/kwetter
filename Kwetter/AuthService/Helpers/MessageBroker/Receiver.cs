@@ -6,7 +6,6 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AuthService.Helpers.MessageBroker
 {
@@ -18,16 +17,13 @@ namespace AuthService.Helpers.MessageBroker
         {
             _authService = authService;
             _persistentConnection = persistentConnection;
-            Task.Run(async () =>
-            {
-                await UserService();
-            });
+            UserService();
 
         }
 
         private const string UserServiceExchange = "UserService";
 
-        public async Task UserService()
+        public void UserService()
         {
             var channel = _persistentConnection.Channel;
             channel.ExchangeDeclare(exchange: UserServiceExchange,
@@ -38,28 +34,26 @@ namespace AuthService.Helpers.MessageBroker
                     routingKey: "Register");
 
             var consumer = new EventingBasicConsumer(channel);
-           consumer.Received += async (model, ea) =>
-             {
-                 var body = ea.Body;
-                 var message = Encoding.UTF8.GetString(body.ToArray());
-                 var routingKey = ea.RoutingKey;
-                 switch (routingKey)
-                 {
-                     case "Register":
-                         var user = JsonConvert.DeserializeObject<AuthUser>(message);
-                         await _authService.UserRegistered(user);
-                         break;
-                 }
-             };
+            consumer.Received += (model, ea) =>
+              {
+                  var body = ea.Body;
+                  var message = Encoding.UTF8.GetString(body.ToArray());
+                  var routingKey = ea.RoutingKey;
+                  switch (routingKey)
+                  {
+                      case "Register":
+                          var user = JsonConvert.DeserializeObject<AuthUser>(message);
+                          _authService.UserRegistered(user);
+                          break;
+                  }
+              };
             channel.BasicConsume(queue: queueName,
                 autoAck: true,
                 consumer: consumer);
 
-            Console.WriteLine(" Press [enter] to exit.");
-            Console.ReadLine();
 
         }
 
-  
+
     }
 }

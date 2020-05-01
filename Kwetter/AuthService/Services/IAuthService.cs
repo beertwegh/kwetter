@@ -13,6 +13,6 @@ namespace AuthService.Services
         Task<string> Authenticate(AuthUser authUser);
         bool ValidateToken(string token);
         string GetClaim(string token, string claimType = Globals.UserIdClaim);
-        Task UserRegistered(AuthUser user);
+        void UserRegistered(AuthUser user);
     }
 }

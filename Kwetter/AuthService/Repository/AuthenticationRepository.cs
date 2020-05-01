@@ -25,10 +25,18 @@ namespace AuthService.Repository
             return user;
         }
 
-        public async Task SaveNewUser(AuthUser user)
+        public void  SaveNewUser(AuthUser user)
         {
-            await _authContext.AuthUsers.AddAsync(user);
-            await _authContext.SaveChangesAsync();
+            try
+            {
+           _authContext.AuthUsers.Add(user);
+           _authContext.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
         }
     }

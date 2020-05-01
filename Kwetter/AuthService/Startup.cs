@@ -34,7 +34,7 @@ namespace AuthService
             services.AddControllers();
             //services.AddDbContext<AuthContext>(o => o.UseMySQL(Configuration.GetConnectionString("AuthDB")));
             services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"));
-            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
 
 
             services.AddCors();
