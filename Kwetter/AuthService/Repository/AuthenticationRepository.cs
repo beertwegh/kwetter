@@ -17,22 +17,19 @@ namespace AuthService.Repository
         public AuthenticationRepository(AuthContext authContext)
         {
             _authContext = authContext;
-            if (!authContext.AuthUsers.Any())
-            {
-
-                authContext.AuthUsers.Add(new AuthUser
-                {
-                    Username = "bas",
-                    Password = "test123"
-                });
-                authContext.SaveChanges();
-            }
         }
 
         public async Task<AuthUser> ValidateAuthUser(string authUserUsername, string password)
         {
             var user = await _authContext.AuthUsers.SingleOrDefaultAsync(u => u.Username == authUserUsername && u.Password == password);
             return user;
+        }
+
+        public async Task SaveNewUser(AuthUser user)
+        {
+            await _authContext.AuthUsers.AddAsync(user);
+            await _authContext.SaveChangesAsync();
+
         }
     }
 }
