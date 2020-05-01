@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AuthService.Helpers;
 using AuthService.Helpers.MessageBroker;
+using AuthService.Helpers.MessageBroker.Connection;
 using AuthService.Messaging;
 using AuthService.Models;
 
@@ -63,6 +64,7 @@ namespace AuthService
             services.AddScoped<IAuthService, Services.AuthService>();
             services.AddScoped<IRpcServer, RpcServer>();
             services.AddScoped<IReceiver, Receiver>();
+            services.AddSingleton<IPersistentConnection, PersistentConnection>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,7 +84,7 @@ namespace AuthService
             {
                 endpoints.MapControllers();
             });
-            
+
         }
     }
 }
