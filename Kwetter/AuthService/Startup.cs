@@ -33,8 +33,8 @@ namespace AuthService
         {
             services.AddControllers();
             //services.AddDbContext<AuthContext>(o => o.UseMySQL(Configuration.GetConnectionString("AuthDB")));
-            services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"));
-            services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
+            services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"), ServiceLifetime.Singleton);
+            services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 
 
             services.AddCors();
@@ -61,9 +61,9 @@ namespace AuthService
                     };
                 });
             // configure DI for application services
-            services.AddScoped<IAuthService, Services.AuthService>();
-            services.AddScoped<IRpcServer, RpcServer>();
-            services.AddScoped<IReceiver, Receiver>();
+            services.AddTransient<IAuthService, Services.AuthService>();
+            services.AddTransient<IRpcServer, RpcServer>();
+            services.AddTransient<IReceiver, Receiver>();
             services.AddSingleton<IPersistentConnection, PersistentConnection>();
         }
 
