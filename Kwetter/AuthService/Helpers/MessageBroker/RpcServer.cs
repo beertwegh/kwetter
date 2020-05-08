@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Threading.Tasks;
 using AuthService.Services;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -7,7 +8,7 @@ using RabbitMQ.Client.Events;
 namespace AuthService.Helpers
 {
     public class RpcServer : IRpcServer
-    { 
+    {
         private readonly IAuthService _authService;
 
         public RpcServer(IAuthService authService)
@@ -59,9 +60,6 @@ namespace AuthService.Helpers
                             multiple: false);
                     }
                 };
-
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
             }
         }
     }

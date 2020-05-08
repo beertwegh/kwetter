@@ -16,7 +16,7 @@ namespace AuthService.Services
     {
         private readonly IAuthenticationRepository _authRepo;
         private readonly IConfiguration _configuration;
-        
+
         public AuthService(IAuthenticationRepository authRepo, IConfiguration configuration)
         {
             _authRepo = authRepo;
@@ -37,7 +37,7 @@ namespace AuthService.Services
             var key = Encoding.ASCII.GetBytes(secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                
+
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(Globals.UserIdClaim, user.UserId.ToString())
@@ -64,7 +64,7 @@ namespace AuthService.Services
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 }, out SecurityToken validatedToken);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -77,6 +77,14 @@ namespace AuthService.Services
 
             var stringClaimValue = securityToken?.Claims.First(claim => claim.Type == claimType).Value;
             return stringClaimValue;
+        }
+
+        public void UserRegistered(AuthUser user)
+        {
+            if (user.IsValid)
+            {
+                _authRepo.SaveNewUser(user);
+            }
         }
     }
 }

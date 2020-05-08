@@ -6,10 +6,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using UserService.DbContext;
+using UserService.Helpers.MessageBroker;
+using UserService.Repository;
+using UserService.Repository.Interface;
+using UserService.Services;
 
 namespace UserService
 {
@@ -26,6 +32,11 @@ namespace UserService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, Services.UserService>();
+            services.AddDbContext<UserDbContext>(o => o.UseInMemoryDatabase("UserDB")); ;
+            services.AddScoped<ISendMessageBroker, SendMessageBroker>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

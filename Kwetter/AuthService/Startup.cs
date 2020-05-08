@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using AuthService.Helpers;
+using AuthService.Helpers.MessageBroker;
+using AuthService.Helpers.MessageBroker.Connection;
+using AuthService.Messaging;
 using AuthService.Models;
 
 namespace AuthService
@@ -30,7 +33,7 @@ namespace AuthService
         {
             services.AddControllers();
             //services.AddDbContext<AuthContext>(o => o.UseMySQL(Configuration.GetConnectionString("AuthDB")));
-            services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"));
+            services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"), ServiceLifetime.Singleton);
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 
 
@@ -58,12 +61,14 @@ namespace AuthService
                     };
                 });
             // configure DI for application services
-            services.AddScoped<IAuthService, Services.AuthService>();
-            services.AddScoped<IRpcServer, RpcServer>();
+            services.AddTransient<IAuthService, Services.AuthService>();
+            services.AddTransient<IRpcServer, RpcServer>();
+            services.AddTransient<IReceiver, Receiver>();
+            services.AddSingleton<IPersistentConnection, PersistentConnection>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRpcServer server)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRpcServer server, IReceiver receiver)
         {
             if (env.IsDevelopment())
             {
@@ -79,7 +84,7 @@ namespace AuthService
             {
                 endpoints.MapControllers();
             });
-            
+
         }
     }
 }
