@@ -25,19 +25,17 @@ namespace AuthService.Repository
             return user;
         }
 
-        public void  SaveNewUser(AuthUser user)
+        public void SaveNewUser(AuthUser user)
         {
             try
             {
-           _authContext.AuthUsers.Add(user);
-           _authContext.SaveChanges();
-
+                _authContext.AuthUsers.Add(user);
+                _authContext.SaveChanges();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-
         }
     }
 }
