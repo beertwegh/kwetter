@@ -24,7 +24,7 @@ namespace ProfileService.Helpers
             }
 
             var rpcClient = new RpcClient();
-            Console.WriteLine(" [x] Requesting fib(30)");
+            Console.WriteLine(" [x] Requesting");
             string response = rpcClient.Call(authorizationHeader);
             Console.WriteLine(" [.] Got '{0}'", response);
             UserId = Guid.Parse(response);

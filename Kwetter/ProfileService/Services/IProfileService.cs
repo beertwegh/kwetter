@@ -11,5 +11,6 @@ namespace ProfileService.Services
         IProfileService
     {
         Task<Profile> GetProfileByUserId(Guid userId);
+        void UserRegistered(UserRegistrationModel model);
     }
 }

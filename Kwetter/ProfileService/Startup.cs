@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using AuthService.Helpers.MessageBroker;
+using AuthService.Helpers.MessageBroker.Connection;
+using AuthService.Messaging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
+using ProfileService.DbContext;
 using ProfileService.Repository;
+using ProfileService.Services;
+using System.Text;
 
 namespace ProfileService
 {
@@ -52,12 +48,16 @@ namespace ProfileService
             //            ValidateAudience = false
             //        };
             //    });
+            services.AddDbContext<ProfileContext>(conf => conf.UseInMemoryDatabase("ProfileDB"), ServiceLifetime.Singleton);
             services.AddTransient<IProfileRepository, ProfileRepository>();
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IProfileService, Services.ProfileService>();
+            
+            services.AddTransient<IReceiver, Receiver>();
+            services.AddSingleton<IPersistentConnection, PersistentConnection>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IReceiver receiver)
         {
             if (env.IsDevelopment())
             {

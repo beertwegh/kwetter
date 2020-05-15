@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ProfileService.Helpers;
 using ProfileService.Models;
@@ -7,7 +8,7 @@ using ProfileService.Services;
 namespace ProfileService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/")]
     public class ProfileController :ControllerBase
     {
         private readonly IProfileService _profileService;
@@ -17,10 +18,12 @@ namespace ProfileService.Controllers
             _profileService = profileService;
         }
 
-        [HttpGet("/current")]
+        [HttpGet("current")]
         [GetCurrentUser]
         public async Task<IActionResult> GetCurrentProfile()
         {
+            if (GetCurrentUser.UserId == Guid.Empty)
+                return Unauthorized();
             var profile = await _profileService.GetProfileByUserId(GetCurrentUser.UserId);
             return Ok(profile);
         }
