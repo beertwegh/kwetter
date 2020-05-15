@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UserService.Helpers.MessageBroker;
 using UserService.Models;
 using UserService.Repository.Interface;
@@ -25,6 +21,11 @@ namespace UserService.Services
             _messageBroker.Registration(model);
             _userRepository.Register(model);
 
+        }
+
+        public async void EditBio(Guid userId, String bio)
+        {
+            _userRepository.EditBio(userId, bio);
         }
     }
 }

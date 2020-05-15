@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using ProfileService.Helpers;
 using UserService.Models;
 using UserService.Services;
 
@@ -20,6 +22,14 @@ namespace UserService.Controllers
         public async Task<IActionResult> Registration([FromBody]UserRegistrationModel model)
         {
             _userService.Registration(model);
+            return Ok();
+        }
+
+        [HttpPost("EditBio")]
+        [GetCurrentUser]
+        public async Task<IActionResult> EditBio([FromBody] String bio)
+        {
+            _userService.EditBio(GetCurrentUser.UserId, bio);
             return Ok();
         }
     }

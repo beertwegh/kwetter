@@ -10,5 +10,6 @@ namespace UserService.Services
     public interface IUserService
     {
         void Registration(UserRegistrationModel model);
+        void EditBio(Guid userId, String bio);
     }
 }

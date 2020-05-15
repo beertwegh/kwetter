@@ -10,5 +10,6 @@ namespace UserService.Repository.Interface
     public interface IUserRepository
     {
         void Register(UserRegistrationModel registerUser);
+        void EditBio(Guid userId, String bio);
     }
 }
