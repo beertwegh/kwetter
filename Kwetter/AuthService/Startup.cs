@@ -32,8 +32,8 @@ namespace AuthService
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            //services.AddDbContext<AuthContext>(o => o.UseMySQL(Configuration.GetConnectionString("AuthDB")));
-            services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"), ServiceLifetime.Singleton);
+            services.AddDbContext<AuthContext>(o => o.UseMySQL(Configuration.GetConnectionString("AuthDB")), ServiceLifetime.Singleton);
+            //services.AddDbContext<AuthContext>(o => o.UseInMemoryDatabase("AuthDB"), ServiceLifetime.Singleton);
             services.AddTransient<IAuthenticationRepository, AuthenticationRepository>();
 
 

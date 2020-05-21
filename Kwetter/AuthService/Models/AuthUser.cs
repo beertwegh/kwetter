@@ -6,7 +6,7 @@ namespace AuthService.Models
 {
     public class AuthUser
     {
-        [Key]
+        [Key] public int AuthUserId { get; set; }
         public Guid UserId { get; set; }
         [Required]
         public string Username { get; set; }

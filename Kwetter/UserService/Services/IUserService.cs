@@ -11,5 +11,6 @@ namespace UserService.Services
     {
         void Registration(UserRegistrationModel model);
         void EditBio(Guid userId, String bio);
+        Task<User> GetUserDetails(Guid userId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UserService.Helpers.MessageBroker;
 using UserService.Models;
 using UserService.Repository.Interface;
@@ -26,6 +27,11 @@ namespace UserService.Services
         public async void EditBio(Guid userId, String bio)
         {
             _userRepository.EditBio(userId, bio);
+        }
+
+        public async Task<User> GetUserDetails(Guid userId)
+        {
+            return await _userRepository.GetUserDetails(userId);
         }
     }
 }

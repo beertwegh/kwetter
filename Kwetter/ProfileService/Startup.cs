@@ -30,28 +30,12 @@ namespace ProfileService
             // configure strongly typed settings objects
             var secret = Configuration.GetValue<string>("AppSettings:Secret");
             var key = Encoding.ASCII.GetBytes(secret);
+            services.AddDbContext<ProfileContext>(o => o.UseMySQL(Configuration.GetConnectionString("ProfileDB")), ServiceLifetime.Singleton);
 
-            //services.AddAuthentication(x =>
-            //    {
-            //        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    })
-            //    .AddJwtBearer("Kwetter", x =>
-            //    {
-            //        x.RequireHttpsMetadata = false;
-            //        x.SaveToken = true;
-            //        x.TokenValidationParameters = new TokenValidationParameters
-            //        {
-            //            ValidateIssuerSigningKey = true,
-            //            IssuerSigningKey = new SymmetricSecurityKey(key),
-            //            ValidateIssuer = false,
-            //            ValidateAudience = false
-            //        };
-            //    });
-            services.AddDbContext<ProfileContext>(conf => conf.UseInMemoryDatabase("ProfileDB"), ServiceLifetime.Singleton);
+            //services.AddDbContext<ProfileContext>(conf => conf.UseInMemoryDatabase("ProfileDB"), ServiceLifetime.Singleton);
             services.AddTransient<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProfileService, Services.ProfileService>();
-            
+
             services.AddTransient<IReceiver, Receiver>();
             services.AddSingleton<IPersistentConnection, PersistentConnection>();
         }

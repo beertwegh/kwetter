@@ -18,6 +18,7 @@ namespace AuthService.Helpers
             _authService = authService;
             _persistentConnection = persistentConnection;
             GetUserId();
+
         }
 
         public void GetUserId()

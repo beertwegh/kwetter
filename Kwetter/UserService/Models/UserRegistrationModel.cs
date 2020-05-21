@@ -23,7 +23,7 @@ namespace UserService.Models
         {
             
         }
-        public UserRegistrationModel(string email, string location, string web, string bio) : base(email, location, web, bio)
+        public UserRegistrationModel(string email, string location, string web, string bio, Guid userGuid) : base(email, location, web, bio, userGuid)
         {
         }
     }

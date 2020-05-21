@@ -11,5 +11,6 @@ namespace UserService.Repository.Interface
     {
         void Register(UserRegistrationModel registerUser);
         void EditBio(Guid userId, String bio);
+        Task<User> GetUserDetails(Guid userId);
     }
 }

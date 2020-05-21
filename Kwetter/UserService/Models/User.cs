@@ -9,7 +9,7 @@ namespace UserService.Models
 {
     public class User 
     {
-        [Key] public Guid UserId { get; set; }
+        [Key]public Guid UserId { get; set; }
         public string Email { get; set; }
         public string Location { get; set; }
         public string Web { get; set; }
@@ -19,8 +19,9 @@ namespace UserService.Models
         {
             
         }
-        public User(string email, string location, string web, string bio)
+        public User(string email, string location, string web, string bio, Guid userId)
         {
+            UserId = userId;
             Email = email;
             Location = location;
             Web = web;
