@@ -24,9 +24,9 @@ namespace UserService.Services
 
         }
 
-        public async void EditBio(Guid userId, String bio)
+        public async void EditUser(User user)
         {
-            _userRepository.EditBio(userId, bio);
+            _userRepository.EditUser(user);
         }
 
         public async Task<User> GetUserDetails(Guid userId)

@@ -25,10 +25,15 @@ namespace UserService.Repository
             await _userDbContext.SaveChangesAsync();
         }
 
-        public async void EditBio(Guid userId, String bio)
+        public async void EditUser(User userUpdate)
         {
-            var user = _userDbContext.Users.Single(u => u.UserId == userId);
-            _userDbContext.Entry(user.Bio).CurrentValues.SetValues(bio);
+            var user = _userDbContext.Users.Single(u => u.UserId == userUpdate.UserId);
+            /*_userDbContext.Entry(user.Bio).CurrentValues.SetValues(userUpdate.Bio);
+            _userDbContext.Entry(user.Web).CurrentValues.SetValues(userUpdate.Web);
+            _userDbContext.Entry(user.Location).CurrentValues.SetValues(userUpdate.Location);*/
+            user.Bio = userUpdate.Bio;
+            user.Location = userUpdate.Location;
+            user.Web = userUpdate.Web;
             await _userDbContext.SaveChangesAsync();
         }
 

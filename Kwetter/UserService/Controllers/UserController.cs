@@ -26,11 +26,12 @@ namespace UserService.Controllers
             return Ok();
         }
 
-        [HttpPost("EditBio")]
+        [HttpPost("EditUser")]
         [GetCurrentUser]
-        public async Task<IActionResult> EditBio([FromBody] String bio)
+        public async Task<IActionResult> EditUser([FromBody] User user)
         {
-            _userService.EditBio(GetCurrentUser.UserId, bio);
+            user.UserId = GetCurrentUser.UserId;
+            _userService.EditUser(user);
             return Ok();
         }
 
