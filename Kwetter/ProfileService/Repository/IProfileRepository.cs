@@ -10,5 +10,6 @@ namespace ProfileService.Repository
     public interface IProfileRepository
     {
         Task<Profile> GetProfileByUserId(Guid userId);
+        void SaveNewProfile(Profile profile);
     }
 }

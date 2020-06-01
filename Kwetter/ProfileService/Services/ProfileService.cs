@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProfileService.Models;
+﻿using ProfileService.Models;
 using ProfileService.Repository;
+using System;
+using System.Threading.Tasks;
 
 namespace ProfileService.Services
 {
@@ -21,6 +18,16 @@ namespace ProfileService.Services
         {
             var profile = await _profileRepository.GetProfileByUserId(userId);
             return profile;
+        }
+
+        public void UserRegistered(UserRegistrationModel model)
+        {
+            var profile = new Profile
+            {
+                UserId = model.UserId,
+                ProfileName = model.ProfileName
+            };
+            _profileRepository.SaveNewProfile(profile);
         }
     }
 }

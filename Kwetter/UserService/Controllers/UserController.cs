@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using ProfileService.Helpers;
 using UserService.Models;
 using UserService.Services;
 
@@ -21,6 +24,23 @@ namespace UserService.Controllers
         {
             _userService.Registration(model);
             return Ok();
+        }
+
+        [HttpPost("EditUser")]
+        [GetCurrentUser]
+        public async Task<IActionResult> EditUser([FromBody] User user)
+        {
+            user.UserId = GetCurrentUser.UserId;
+            _userService.EditUser(user);
+            return Ok();
+        }
+
+        [HttpGet("details")]
+        [GetCurrentUser]
+        public async Task<IActionResult> GetUserDetails()
+        {
+            var user = await _userService.GetUserDetails(GetCurrentUser.UserId);
+            return Ok(user);
         }
     }
 }

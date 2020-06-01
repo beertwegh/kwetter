@@ -10,5 +10,7 @@ namespace UserService.Services
     public interface IUserService
     {
         void Registration(UserRegistrationModel model);
+        Task<User> GetUserDetails(Guid userId);
+        void EditUser(User user);
     }
 }

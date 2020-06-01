@@ -10,5 +10,7 @@ namespace UserService.Repository.Interface
     public interface IUserRepository
     {
         void Register(UserRegistrationModel registerUser);
+        Task<User> GetUserDetails(Guid userId);
+        void EditUser(User userUpdate);
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UserService.Helpers.MessageBroker;
 using UserService.Models;
@@ -25,6 +22,16 @@ namespace UserService.Services
             _messageBroker.Registration(model);
             _userRepository.Register(model);
 
+        }
+
+        public async void EditUser(User user)
+        {
+            _userRepository.EditUser(user);
+        }
+
+        public async Task<User> GetUserDetails(Guid userId)
+        {
+            return await _userRepository.GetUserDetails(userId);
         }
     }
 }

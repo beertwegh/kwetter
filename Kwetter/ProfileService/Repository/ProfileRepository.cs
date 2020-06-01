@@ -21,5 +21,11 @@ namespace ProfileService.Repository
             var profile = await this._profileContext.Profiles.Where(p => p.UserId == userId).SingleOrDefaultAsync();
             return profile;
         }
+
+        public void SaveNewProfile(Profile profile)
+        {
+            _profileContext.Add(profile);
+            _profileContext.SaveChanges();
+        }
     }
 }
