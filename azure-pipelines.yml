@@ -36,36 +36,36 @@ steps:
 
 - script: |
     cd ProfileService
-    docker build -t $(DOCKER_USER)/ProfileService .
-    docker tag $(DOCKER_USER)/ProfileService $(DOCKER_USER)/ProfileService:$(Build.SourceVersion)
+    docker build -t $(DOCKER_USER)/profileservice .
+    docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/ProfileService
+    docker push $(DOCKER_USER)/profileservice
   displayName: 'ProfileService'
 - script: |
     cd UserService
-    docker build -t $(DOCKER_USER)/UserService .
-    docker tag $(DOCKER_USER)/UserService $(DOCKER_USER)/UserService:$(Build.SourceVersion)
+    docker build -t $(DOCKER_USER)/userservice .
+    docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/UserService
+    docker push $(DOCKER_USER)/userservice
   displayName: 'UserService'
 - script: |
     cd MessageService
-    docker build -t $(DOCKER_USER)/MessageService .
-    docker tag $(DOCKER_USER)/MessageService $(DOCKER_USER)/MessageService:$(Build.SourceVersion)
+    docker build -t $(DOCKER_USER)/messageservice .
+    docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/MessageService
+    docker push $(DOCKER_USER)/messageservice
   displayName: 'MessageService'
 - script: |
     cd AuthService
-    docker build -t $(DOCKER_USER)/AuthService .
-    docker tag $(DOCKER_USER)/AuthService $(DOCKER_USER)/AuthService:$(Build.SourceVersion)
+    docker build -t $(DOCKER_USER)/authservice .
+    docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/AuthService
+    docker push $(DOCKER_USER)/authservice
   displayName: 'AuthService'
 - script: |
     cd OcelotAPIGateway
-    docker build -t $(DOCKER_USER)/OcelotAPIGateway .
-    docker tag $(DOCKER_USER)/OcelotAPIGateway $(DOCKER_USER)/OcelotAPIGateway:$(Build.SourceVersion)
+    docker build -t $(DOCKER_USER)/gateway .
+    docker tag $(DOCKER_USER)/gateway $(DOCKER_USER)/gateway:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/OcelotAPIGateway
+    docker push $(DOCKER_USER)/gateway
   displayName: 'OcelotAPIGateway'
