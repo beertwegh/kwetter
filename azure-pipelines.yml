@@ -32,3 +32,40 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+
+- script: |
+    cd ProfileService
+    docker build -t $(DOCKER_USER)/ProfileService .
+    docker tag $(DOCKER_USER)/ProfileService $(DOCKER_USER)/ProfileService:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/ProfileService
+  displayName: 'ProfileService'
+- script: |
+    cd UserService
+    docker build -t $(DOCKER_USER)/UserService .
+    docker tag $(DOCKER_USER)/UserService $(DOCKER_USER)/UserService:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/UserService
+  displayName: 'UserService'
+- script: |
+    cd MessageService
+    docker build -t $(DOCKER_USER)/MessageService .
+    docker tag $(DOCKER_USER)/MessageService $(DOCKER_USER)/MessageService:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/MessageService
+  displayName: 'MessageService'
+- script: |
+    cd AuthService
+    docker build -t $(DOCKER_USER)/AuthService .
+    docker tag $(DOCKER_USER)/AuthService $(DOCKER_USER)/AuthService:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/AuthService
+  displayName: 'AuthService'
+- script: |
+    cd OcelotAPIGateway
+    docker build -t $(DOCKER_USER)/OcelotAPIGateway .
+    docker tag $(DOCKER_USER)/OcelotAPIGateway $(DOCKER_USER)/OcelotAPIGateway:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/OcelotAPIGateway
+  displayName: 'OcelotAPIGateway'
