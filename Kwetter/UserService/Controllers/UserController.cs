@@ -1,12 +1,12 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using MessageService.Models;
+using MessageService.Services;
 using Microsoft.AspNetCore.Authorization;
 using ProfileService.Helpers;
-using UserService.Models;
-using UserService.Services;
 
-namespace UserService.Controllers
+namespace MessageService.Controllers
 {
     [Route("[controller]")]
     [ApiController]

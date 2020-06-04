@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using MessageService.DbContext;
+using MessageService.Models;
+using MessageService.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using UserService.DbContext;
-using UserService.Models;
-using UserService.Repository.Interface;
 
-namespace UserService.Repository
+namespace MessageService.Repository
 {
     public class UserRepository: IUserRepository
 
