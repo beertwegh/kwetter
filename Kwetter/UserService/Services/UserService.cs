@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MessageService.Helpers.MessageBroker;
-using MessageService.Models;
-using MessageService.Repository.Interface;
+using UserService.Helpers.MessageBroker;
+using UserService.Models;
+using UserService.Repository.Interface;
 
-namespace MessageService.Services
+namespace UserService.Services
 {
     public class UserService : IUserService
     {

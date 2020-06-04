@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace MessageService.Models
+namespace UserService.Models
 {
     public class UserRegistrationModel : User
     {

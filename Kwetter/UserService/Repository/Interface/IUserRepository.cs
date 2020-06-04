@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MessageService.Models;
+using UserService.Models;
 
-namespace MessageService.Repository.Interface
+namespace UserService.Repository.Interface
 {
     public interface IUserRepository
     {

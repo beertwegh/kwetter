@@ -1,16 +1,16 @@
-using MessageService.DbContext;
-using MessageService.Helpers.MessageBroker;
-using MessageService.Repository;
-using MessageService.Repository.Interface;
-using MessageService.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using UserService.DbContext;
+using UserService.Helpers.MessageBroker;
+using UserService.Repository;
+using UserService.Repository.Interface;
+using UserService.Services;
 
-namespace MessageService
+namespace UserService
 {
     public class Startup
     {

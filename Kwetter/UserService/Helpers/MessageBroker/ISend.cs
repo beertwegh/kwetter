@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MessageService.Models;
+using UserService.Models;
 
-namespace MessageService.Helpers.MessageBroker
+namespace UserService.Helpers.MessageBroker
 {
     public interface ISendMessageBroker
     {

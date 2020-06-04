@@ -1,7 +1,7 @@
-﻿using MessageService.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using UserService.Models;
 
-namespace MessageService.DbContext
+namespace UserService.DbContext
 {
     public class UserDbContext : Microsoft.EntityFrameworkCore.DbContext
     {

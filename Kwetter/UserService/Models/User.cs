@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessageService.Models
+namespace UserService.Models
 {
     public class User 
     {
