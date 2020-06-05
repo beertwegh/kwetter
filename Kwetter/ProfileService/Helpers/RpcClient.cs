@@ -43,7 +43,7 @@ public class RpcClient
         var messageBytes = Encoding.UTF8.GetBytes(message);
         channel.BasicPublish(
             exchange: "",
-            routingKey: "rpc_queue",
+            routingKey: "getuserid",
             basicProperties: props,
             body: messageBytes);
 

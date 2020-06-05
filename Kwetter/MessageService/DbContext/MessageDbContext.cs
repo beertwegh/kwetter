@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MessageService.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MessageService.DbContext
 {
@@ -13,7 +14,7 @@ namespace MessageService.DbContext
         }
         #region DbSets
 
-        
+        public DbSet<Message> Messages { get; set; }
         #endregion
 
     }

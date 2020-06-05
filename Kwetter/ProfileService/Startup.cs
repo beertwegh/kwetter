@@ -11,6 +11,8 @@ using ProfileService.DbContext;
 using ProfileService.Repository;
 using ProfileService.Services;
 using System.Text;
+using AuthService.Helpers;
+using ProfileService.Helpers.MessageBroker;
 
 namespace ProfileService
 {
@@ -38,10 +40,12 @@ namespace ProfileService
 
             services.AddTransient<IReceiver, Receiver>();
             services.AddSingleton<IPersistentConnection, PersistentConnection>();
+
+            services.AddTransient<IRpcServer, RpcServer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IReceiver receiver)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IReceiver receiver, IRpcServer rpcServer)
         {
             if (env.IsDevelopment())
             {

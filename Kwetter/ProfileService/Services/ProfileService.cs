@@ -29,5 +29,10 @@ namespace ProfileService.Services
             };
             _profileRepository.SaveNewProfile(profile);
         }
+
+        public string GetUserName(Guid guid)
+        {
+            return _profileRepository.GetUserName(guid);
+        }
     }
 }

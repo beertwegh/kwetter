@@ -29,6 +29,8 @@ namespace UserService.Services
             _userRepository.EditUser(user);
         }
 
+
+
         public async Task<User> GetUserDetails(Guid userId)
         {
             return await _userRepository.GetUserDetails(userId);

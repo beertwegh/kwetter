@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc.Filters;
-using RabbitMQ.Client;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
+using System;
 using System.Linq;
 using System.Net;
-using System.Text;
+using MessageService.Helpers.MessageBroker;
 
 namespace MessageService.Helpers
 {
@@ -24,8 +23,8 @@ namespace MessageService.Helpers
             }
 
             var rpcClient = new RpcClient();
-            Console.WriteLine(" [x] Requesting fib(30)");
-            string response = rpcClient.Call(authorizationHeader);
+            Console.WriteLine(" [x] Requesting userid");
+            string response = rpcClient.Call(authorizationHeader, "getuserid");
             Console.WriteLine(" [.] Got '{0}'", response);
             UserId = Guid.Parse(response);
             rpcClient.Close();
