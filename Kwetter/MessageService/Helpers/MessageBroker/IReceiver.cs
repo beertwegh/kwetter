@@ -1,4 +1,4 @@
-﻿namespace MessageService.Messaging
+﻿namespace MessageService.Helpers.MessageBroker
 {
     public interface IReceiver
     {

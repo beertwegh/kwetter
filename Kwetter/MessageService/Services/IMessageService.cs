@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessageService.Models;
+using ProfileService.Models;
 
 namespace MessageService.Services
 {
@@ -8,5 +9,6 @@ namespace MessageService.Services
     {
         void NewMessage(Message message, Guid userId);
         List<Message> GetAllMessages(Guid? userId = null);
+        void EditProfileName(EditProfileName model);
     }
 }

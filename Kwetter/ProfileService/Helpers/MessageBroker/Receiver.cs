@@ -1,19 +1,19 @@
-﻿using AuthService.Messaging;
+﻿using System.Text;
+using AuthService.Helpers.MessageBroker;
+using AuthService.Messaging;
 using Newtonsoft.Json;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System;
-using System.Text;
 using ProfileService.Models;
 using ProfileService.Services;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
-namespace AuthService.Helpers.MessageBroker
+namespace ProfileService.Helpers.MessageBroker
 {
     public class Receiver : IReceiver
     {
         private readonly IProfileService _profileService;
         private readonly IPersistentConnection _persistentConnection;
-        public Receiver( IPersistentConnection persistentConnection, IProfileService profileService)
+        public Receiver(IPersistentConnection persistentConnection, IProfileService profileService)
         {
             _persistentConnection = persistentConnection;
             _profileService = profileService;

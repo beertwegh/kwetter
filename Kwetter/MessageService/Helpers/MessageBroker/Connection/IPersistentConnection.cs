@@ -1,7 +1,7 @@
-﻿using RabbitMQ.Client;
-using System;
+﻿using System;
+using RabbitMQ.Client;
 
-namespace MessageService.Helpers.MessageBroker
+namespace MessageService.Helpers.MessageBroker.Connection
 {
     public interface IPersistentConnection : IDisposable
     {

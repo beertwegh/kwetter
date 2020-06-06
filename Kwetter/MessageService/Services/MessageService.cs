@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using MessageService.Helpers.MessageBroker;
 using MessageService.Models;
 using MessageService.Repository.Interface;
+using ProfileService.Models;
 
 namespace MessageService.Services
 {
@@ -35,6 +36,11 @@ namespace MessageService.Services
             message.UserId = userId;
             message.UserName = _rpcCalls.GetUserName(userId);
             _messageRepository.SaveNewMessage(message);
+        }
+
+        public void EditProfileName(EditProfileName model)
+        {
+            _messageRepository.EditProfileName(model);
         }
     }
 }

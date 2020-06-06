@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using MessageService.Helpers.MessageBroker;
 using MessageService.Helpers.MessageBroker.Connection;
-using MessageService.Messaging;
 using MessageService.DbContext;
 using MessageService.Helpers.MessageBroker;
 using MessageService.Repository;
@@ -49,7 +48,7 @@ namespace MessageService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IReceiver receiver)
         {
             if (env.IsDevelopment())
             {

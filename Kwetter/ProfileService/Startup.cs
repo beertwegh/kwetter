@@ -37,10 +37,9 @@ namespace ProfileService
             //services.AddDbContext<ProfileContext>(conf => conf.UseInMemoryDatabase("ProfileDB"), ServiceLifetime.Singleton);
             services.AddTransient<IProfileRepository, ProfileRepository>();
             services.AddScoped<IProfileService, Services.ProfileService>();
-
             services.AddTransient<IReceiver, Receiver>();
             services.AddSingleton<IPersistentConnection, PersistentConnection>();
-
+            services.AddTransient<ISendMessageBroker, SendMessageBroker>();
             services.AddTransient<IRpcServer, RpcServer>();
         }
 
