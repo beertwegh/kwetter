@@ -5,7 +5,7 @@
 
 trigger:
 - master
-
+- dev
 pool:
   vmImage: 'windows-latest'
 
@@ -40,6 +40,7 @@ steps:
     docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/profileservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'ProfileService'
 - script: |
     cd UserService
@@ -47,6 +48,7 @@ steps:
     docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/userservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'UserService'
 - script: |
     cd MessageService
@@ -54,6 +56,7 @@ steps:
     docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/messageservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'MessageService'
 - script: |
     cd AuthService
@@ -61,6 +64,7 @@ steps:
     docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/authservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'AuthService'
 - script: |
     cd OcelotAPIGateway
@@ -68,4 +72,5 @@ steps:
     docker tag $(DOCKER_USER)/gateway $(DOCKER_USER)/gateway:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/gateway
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
   displayName: 'OcelotAPIGateway'
