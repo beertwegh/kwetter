@@ -1,0 +1,18 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
+
+WORKDIR /repo
+
+COPY /MessageService.csproj ./MessageService.csproj
+
+RUN dotnet restore
+
+COPY . ./
+
+RUN dotnet publish ./MessageService.csproj -c Release -o /app/
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1 AS runtime
+
+COPY --from=build /app/ /app/
+WORKDIR /app
+
+ENTRYPOINT ["dotnet", "MessageService.dll"]

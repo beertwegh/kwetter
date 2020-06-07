@@ -32,8 +32,6 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
-
 - script: |
     cd ProfileService
     docker build -t $(DOCKER_USER)/profileservice .
