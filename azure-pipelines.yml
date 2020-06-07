@@ -28,7 +28,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: PublishBuildArtifacts@1
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
@@ -36,7 +35,7 @@ steps:
 
 - script: |
     
-    docker build -f kwetter/AuthService -t $(DOCKER_USER)/authservice .
+    docker build -f AuthService -t $(DOCKER_USER)/authservice .
     docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/authservice
