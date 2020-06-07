@@ -14,7 +14,6 @@ using System.Text;
 using AuthService.Helpers;
 using AuthService.Helpers.MessageBroker;
 using AuthService.Helpers.MessageBroker.Connection;
-using AuthService.Messaging;
 using AuthService.Models;
 
 namespace AuthService

@@ -11,5 +11,7 @@ namespace ProfileService.Repository
     {
         Task<Profile> GetProfileByUserId(Guid userId);
         void SaveNewProfile(Profile profile);
+        string GetUserName(Guid guid);
+        void EditProfileName(string newName, Guid userId);
     }
 }

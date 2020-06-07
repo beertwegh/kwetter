@@ -37,6 +37,7 @@ namespace UserService.Repository
             await _userDbContext.SaveChangesAsync();
         }
 
+
         public async Task<User> GetUserDetails(Guid userId)
         {
             var user = _userDbContext.Users.Single(u => u.UserId == userId);

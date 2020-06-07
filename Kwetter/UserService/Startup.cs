@@ -30,7 +30,7 @@ namespace UserService
             services.AddDbContext<UserDbContext>(o => o.UseMySQL(Configuration.GetConnectionString("UserDB")), ServiceLifetime.Singleton);
             //services.AddDbContext<UserDbContext>(o => o.UseInMemoryDatabase("UserDB"), ServiceLifetime.Singleton);
             services.AddScoped<ISendMessageBroker, SendMessageBroker>();
-
+            
 
         }
 

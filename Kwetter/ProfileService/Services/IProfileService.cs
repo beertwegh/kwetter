@@ -7,10 +7,10 @@ using ProfileService.Models;
 
 namespace ProfileService.Services
 {
-    public interface 
-        IProfileService
-    {
+    public interface IProfileService {
         Task<Profile> GetProfileByUserId(Guid userId);
         void UserRegistered(UserRegistrationModel model);
+        string GetUserName(Guid guid);
+        void EditProfileName(string newName, Guid userId);
     }
 }

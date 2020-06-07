@@ -27,5 +27,16 @@ namespace ProfileService.Repository
             _profileContext.Add(profile);
             _profileContext.SaveChanges();
         }
+
+        public string GetUserName(Guid guid) {
+            return _profileContext.Profiles.Where(p => p.UserId == guid).Select(p => p.ProfileName).First();
+        }
+
+        public void EditProfileName(string newName, Guid userId)
+        {
+            var profile =_profileContext.Profiles.Single(w => w.UserId == userId);
+            profile.ProfileName = newName;
+            _profileContext.SaveChanges();
+        }
     }
 }

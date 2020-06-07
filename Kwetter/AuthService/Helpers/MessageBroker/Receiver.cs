@@ -1,5 +1,4 @@
-﻿using AuthService.Messaging;
-using AuthService.Models;
+﻿using AuthService.Models;
 using AuthService.Services;
 using Newtonsoft.Json;
 using RabbitMQ.Client;

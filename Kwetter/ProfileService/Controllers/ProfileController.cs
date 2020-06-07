@@ -9,7 +9,7 @@ namespace ProfileService.Controllers
 {
     [ApiController]
     [Route("[controller]/")]
-    public class ProfileController :ControllerBase
+    public class ProfileController : ControllerBase
     {
         private readonly IProfileService _profileService;
 
@@ -26,6 +26,17 @@ namespace ProfileService.Controllers
                 return Unauthorized();
             var profile = await _profileService.GetProfileByUserId(GetCurrentUser.UserId);
             return Ok(profile);
+        }
+
+        [HttpPost("editname")]
+        [GetCurrentUser]
+        public async Task<IActionResult> EditProfileName([FromBody] Profile profile)
+        {
+            if (GetCurrentUser.UserId == Guid.Empty)
+                return Unauthorized();
+            var newName = profile.ProfileName;
+            _profileService.EditProfileName(newName, GetCurrentUser.UserId);
+            return Ok();
         }
 
     }
