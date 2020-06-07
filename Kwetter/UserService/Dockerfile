@@ -4,7 +4,7 @@ WORKDIR /repo
 
 COPY /UserService.csproj ./UserService.csproj
 
-RUN dotnet clean
+RUN dotnet restore
 RUN dotnet clean
 
 COPY . ./

@@ -4,7 +4,7 @@ WORKDIR /repo
 
 COPY /OcelotAPIGateway.csproj ./OcelotAPIGateway.csproj
 
-RUN dotnet clean 
+RUN dotnet restore 
 RUN dotnet clean
 
 COPY . ./

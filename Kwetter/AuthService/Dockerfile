@@ -4,7 +4,7 @@ WORKDIR /repo
 
 COPY /AuthService.csproj ./AuthService.csproj
 
-RUN dotnet clean 
+RUN dotnet restore
 RUN dotnet clean
 
 COPY . ./
