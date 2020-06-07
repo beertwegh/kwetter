@@ -34,11 +34,10 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: AzureRmWebAppDeployment@4
-  displayName: "AuthService"
-  inputs:
-    ConnectionType: 'PublishProfile'
-    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/AuthService/*/**/*.pubxml'
-    PublishProfilePassword: '$(DOCKER_PASSWORD)'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/Kwetter/AuthService/**/*.zip'
-
+- script: |
+    
+    docker build -f kwetter/AuthService -t $(DOCKER_USER)/AuthService .
+    docker tag $(DOCKER_USER)/AuthService $(DOCKER_USER)/AuthService:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/AuthService
+  displayName: 'AuthService'
