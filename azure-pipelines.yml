@@ -33,7 +33,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 - script: |
-    cd ProfileService
+    cd Kwetter/ProfileService
     docker build -t $(DOCKER_USER)/profileservice .
     docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
@@ -41,7 +41,7 @@ steps:
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'ProfileService'
 - script: |
-    cd UserService
+    cd Kwetter/UserService
     docker build -t $(DOCKER_USER)/userservice .
     docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
@@ -49,7 +49,7 @@ steps:
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'UserService'
 - script: |
-    cd MessageService
+    cd Kwetter/MessageService
     docker build -t $(DOCKER_USER)/messageservice .
     docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
@@ -57,7 +57,7 @@ steps:
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'MessageService'
 - script: |
-    cd AuthService
+    cd Kwetter/AuthService
     docker build -t $(DOCKER_USER)/authservice .
     docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
@@ -65,7 +65,7 @@ steps:
   condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
   displayName: 'AuthService'
 - script: |
-    cd OcelotAPIGateway
+    cd Kwetter/OcelotAPIGateway
     docker build -t $(DOCKER_USER)/gateway .
     docker tag $(DOCKER_USER)/gateway $(DOCKER_USER)/gateway:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
