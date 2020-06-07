@@ -8,7 +8,7 @@ WORKDIR /src
 COPY ["Kwetter/AuthService/AuthService.csproj", "AuthService/"]
 RUN dotnet restore "AuthService/AuthService.csproj"
 COPY . .
-RUN mkdir "/src/AuthService"
+RUN mkdir /src/AuthService
 WORKDIR "/src/AuthService"
 RUN dotnet build "AuthService.csproj" -c Release -o /app
 
