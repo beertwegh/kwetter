@@ -39,3 +39,5 @@ steps:
     PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/AuthService/*/**/*.pubxml'
     PublishProfilePassword: '$(DOCKER_PASSWORD)'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+- task: PublishBuildArtifacts@1
