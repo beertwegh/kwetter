@@ -15,12 +15,14 @@ namespace MessageService.Helpers.MessageBroker
 
         private readonly IPersistentConnection _persistentConnection;
         private const string ProfileServiceExchange = "ProfileService";
+        private const string UserServiceExchange = "UserService";
         private readonly IMessageService _messageService;
         public Receiver(IPersistentConnection persistentConnection, IMessageService messageService)
         {
             _persistentConnection = persistentConnection;
             _messageService = messageService;
             ProfileService();
+            DeleteUser();
         }
         public void ProfileService()
         {
@@ -35,7 +37,6 @@ namespace MessageService.Helpers.MessageBroker
             var consumer = new EventingBasicConsumer(channel);
             consumer.Received += (model, ea) =>
             {
-                Console.WriteLine("Received sometginh");
                 var body = ea.Body;
                 var message = Encoding.UTF8.GetString(body.ToArray());
                 var routingKey = ea.RoutingKey;
@@ -44,6 +45,35 @@ namespace MessageService.Helpers.MessageBroker
                     case "EditProfileName":
                         var user = JsonConvert.DeserializeObject<EditProfileName>(message);
                         _messageService.EditProfileName(user);
+                        break;
+                }
+            };
+            channel.BasicConsume(queue: queueName,
+                autoAck: true,
+                consumer: consumer);
+
+
+        }
+        public void DeleteUser()
+        {
+            var channel = _persistentConnection.Channel;
+            channel.ExchangeDeclare(exchange: UserServiceExchange,
+                type: "direct");
+            var queueName = channel.QueueDeclare().QueueName;
+            channel.QueueBind(queue: queueName,
+                exchange: UserServiceExchange,
+                routingKey: "DeleteUser");
+
+            var consumer = new EventingBasicConsumer(channel);
+            consumer.Received += (model, ea) =>
+            {
+                var body = ea.Body;
+                var message = Encoding.UTF8.GetString(body.ToArray());
+                var routingKey = ea.RoutingKey;
+                switch (routingKey)
+                {
+                    case "DeleteUser":
+                        _messageService.UserDeleted(Guid.Parse(message));
                         break;
                 }
             };

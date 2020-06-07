@@ -1,4 +1,5 @@
-﻿using MessageService.DbContext;
+﻿using System;
+using MessageService.DbContext;
 using MessageService.Models;
 using MessageService.Repository.Interface;
 using ProfileService.Models;
@@ -26,6 +27,13 @@ namespace MessageService.Repository
         {
             var list = _messageDbContext.Messages.Where(m => m.UserId == model.UserId).ToList();
             list.ForEach(s => s.UserName = model.NewName);
+            _messageDbContext.SaveChanges();
+        }
+
+        public void UserDeleted(Guid userId)
+        {
+            var messages = _messageDbContext.Messages.Where(w => w.UserId == userId).ToList();
+            _messageDbContext.Messages.RemoveRange(messages);
             _messageDbContext.SaveChanges();
         }
 

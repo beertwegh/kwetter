@@ -86,5 +86,10 @@ namespace AuthService.Services
                 _authRepo.SaveNewUser(user);
             }
         }
+
+        public void UserDeleted(Guid UserId)
+        {
+            _authRepo.UserDeleted(UserId);
+        }
     }
 }

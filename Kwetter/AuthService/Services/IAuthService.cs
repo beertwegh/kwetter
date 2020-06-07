@@ -14,5 +14,6 @@ namespace AuthService.Services
         bool ValidateToken(string token);
         string GetClaim(string token, string claimType = Globals.UserIdClaim);
         void UserRegistered(AuthUser user);
+        void UserDeleted(Guid UserId);
     }
 }

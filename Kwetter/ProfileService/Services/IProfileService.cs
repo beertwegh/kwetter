@@ -12,5 +12,6 @@ namespace ProfileService.Services
         void UserRegistered(UserRegistrationModel model);
         string GetUserName(Guid guid);
         void EditProfileName(string newName, Guid userId);
+        void UserDeleted(Guid parse);
     }
 }

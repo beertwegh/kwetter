@@ -13,5 +13,6 @@ namespace ProfileService.Repository
         void SaveNewProfile(Profile profile);
         string GetUserName(Guid guid);
         void EditProfileName(string newName, Guid userId);
+        void UserDeleted(Guid userId);
     }
 }

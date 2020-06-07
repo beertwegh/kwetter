@@ -76,7 +76,7 @@ namespace AuthService
 
             app.UseHttpsRedirection();
             app.UseRouting();
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader());
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

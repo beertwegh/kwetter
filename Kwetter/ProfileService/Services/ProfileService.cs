@@ -33,6 +33,11 @@ namespace ProfileService.Services
             _profileRepository.SaveNewProfile(profile);
         }
 
+        public void UserDeleted(Guid userId)
+        {
+            _profileRepository.UserDeleted(userId);
+        }
+
         public string GetUserName(Guid guid)
         {
             return _profileRepository.GetUserName(guid);

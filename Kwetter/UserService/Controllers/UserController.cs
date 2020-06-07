@@ -20,7 +20,7 @@ namespace UserService.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Registration([FromBody]UserRegistrationModel model)
+        public async Task<IActionResult> Registration([FromBody] UserRegistrationModel model)
         {
             _userService.Registration(model);
             return Ok();
@@ -42,5 +42,16 @@ namespace UserService.Controllers
             var user = await _userService.GetUserDetails(GetCurrentUser.UserId);
             return Ok(user);
         }
+
+        [HttpDelete("delete")]
+        [GetCurrentUser]
+        public async Task<IActionResult> DeleteUser()
+        {
+            if (GetCurrentUser.UserId == Guid.Empty)
+                return Unauthorized();
+            _userService.DeleteUser(GetCurrentUser.UserId);
+            return Ok();
+        }
     }
+
 }

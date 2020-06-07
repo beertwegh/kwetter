@@ -8,7 +8,7 @@ using UserService.Repository.Interface;
 
 namespace UserService.Repository
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
 
     {
         private readonly UserDbContext _userDbContext;
@@ -43,6 +43,13 @@ namespace UserService.Repository
             var user = _userDbContext.Users.Single(u => u.UserId == userId);
             return user;
 
+        }
+
+        public async void Delete(Guid userId)
+        {
+            var user = _userDbContext.Users.Single(u => u.UserId == userId);
+            _userDbContext.Users.Remove(user);
+            _userDbContext.SaveChanges();
         }
     }
 }

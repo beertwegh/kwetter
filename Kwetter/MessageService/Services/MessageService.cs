@@ -42,5 +42,10 @@ namespace MessageService.Services
         {
             _messageRepository.EditProfileName(model);
         }
+
+        public void UserDeleted(Guid userId)
+        {
+            _messageRepository.UserDeleted(userId);
+        }
     }
 }

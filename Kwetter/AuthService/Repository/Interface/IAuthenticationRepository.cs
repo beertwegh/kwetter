@@ -14,5 +14,6 @@ namespace AuthService.Repository.Interface
         Task<AuthUser> ValidateAuthUser(string authUserUsername, string password);
 
     void SaveNewUser(AuthUser user);
+    void UserDeleted(Guid userId);
     }
 }

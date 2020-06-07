@@ -12,5 +12,6 @@ namespace UserService.Services
         void Registration(UserRegistrationModel model);
         Task<User> GetUserDetails(Guid userId);
         void EditUser(User user);
+        void DeleteUser(Guid userId);
     }
 }

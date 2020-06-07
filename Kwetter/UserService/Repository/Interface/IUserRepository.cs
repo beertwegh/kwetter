@@ -12,5 +12,6 @@ namespace UserService.Repository.Interface
         void Register(UserRegistrationModel registerUser);
         Task<User> GetUserDetails(Guid userId);
         void EditUser(User userUpdate);
+        void Delete(Guid userId);
     }
 }

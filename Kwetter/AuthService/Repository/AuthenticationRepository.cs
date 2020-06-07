@@ -37,5 +37,12 @@ namespace AuthService.Repository
                 Console.WriteLine(e);
             }
         }
+
+        public void UserDeleted(Guid userId)
+        {
+            var user = _authContext.AuthUsers.Single(u => u.UserId == userId);
+            _authContext.AuthUsers.Remove(user);
+            _authContext.SaveChanges();
+        }
     }
 }

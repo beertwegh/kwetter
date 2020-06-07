@@ -10,5 +10,6 @@ namespace UserService.Helpers.MessageBroker
     public interface ISendMessageBroker
     {
         void Registration(UserRegistrationModel user);
+        void Delete(Guid userId);
     }
 }

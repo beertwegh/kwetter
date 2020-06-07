@@ -17,7 +17,7 @@ namespace UserService.Helpers.MessageBroker
             Task.Run(() =>
             {
 
-                var factory = new ConnectionFactory() {HostName = "10.12.3.98"};
+                var factory = new ConnectionFactory() { HostName = "localhost" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
@@ -28,6 +28,29 @@ namespace UserService.Helpers.MessageBroker
 
                     channel.BasicPublish(exchange: UserServiceExchange,
                         routingKey: "Register",
+                        basicProperties: null,
+                        body: body);
+                }
+
+            });
+        }
+
+        public void Delete(Guid userId)
+        {
+            Task.Run(() =>
+            {
+
+                var factory = new ConnectionFactory() { HostName = "localhost" };
+                using (var connection = factory.CreateConnection())
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare(exchange: UserServiceExchange,
+                        type: "direct");
+
+                    var body = Encoding.UTF8.GetBytes(userId.ToString());
+
+                    channel.BasicPublish(exchange: UserServiceExchange,
+                        routingKey: "DeleteUser",
                         basicProperties: null,
                         body: body);
                 }

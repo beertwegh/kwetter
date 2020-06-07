@@ -35,5 +35,11 @@ namespace UserService.Services
         {
             return await _userRepository.GetUserDetails(userId);
         }
+
+        public async void DeleteUser(Guid userId)
+        {
+            _userRepository.Delete(userId);
+            _messageBroker.Delete(userId);
+        }
     }
 }

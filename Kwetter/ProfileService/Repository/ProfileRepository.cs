@@ -38,5 +38,12 @@ namespace ProfileService.Repository
             profile.ProfileName = newName;
             _profileContext.SaveChanges();
         }
+
+        public void UserDeleted(Guid userId)
+        {
+            var profile = _profileContext.Profiles.Single(p => p.UserId == userId);
+            _profileContext.Remove(profile);
+            _profileContext.SaveChanges();
+        }
     }
 }

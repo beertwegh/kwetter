@@ -10,5 +10,6 @@ namespace MessageService.Services
         void NewMessage(Message message, Guid userId);
         List<Message> GetAllMessages(Guid? userId = null);
         void EditProfileName(EditProfileName model);
+        void UserDeleted(Guid parse);
     }
 }
