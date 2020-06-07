@@ -4,7 +4,8 @@ WORKDIR /repo
 
 COPY /ProfileService.csproj ./ProfileService.csproj
 
-RUN dotnet restore
+RUN dotnet clean
+RUN dotnet clean
 
 COPY . ./
 

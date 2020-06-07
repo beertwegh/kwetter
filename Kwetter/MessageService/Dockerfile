@@ -4,7 +4,8 @@ WORKDIR /repo
 
 COPY /MessageService.csproj ./MessageService.csproj
 
-RUN dotnet restore
+RUN dotnet clean
+RUN dotnet clean
 
 COPY . ./
 
