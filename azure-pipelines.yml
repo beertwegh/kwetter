@@ -38,13 +38,3 @@ steps:
   inputs:
     ConnectionType: 'PublishProfile'
     PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/AuthService/*/**/*.pubxml'
-- task: AzureRmWebAppDeployment@4
-  displayName: "OcelotAPIGateway"
-  inputs:
-    ConnectionType: 'PublishProfile'
-    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/OcelotAPIGateway/*/**/*.pubxml'
-- task: AzureRmWebAppDeployment@4
-  displayName: "UserService"
-  inputs:
-    ConnectionType: 'PublishProfile'
-    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/UserService/*/**/*.pubxml'
