@@ -1,4 +1,5 @@
 # ASP.NET Core (.NET Framework)
+
 # Build and test ASP.NET Core projects targeting the full .NET Framework.
 # Add steps that publish symbols, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
@@ -27,48 +28,23 @@ steps:
     msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-
 - task: VSTest@2
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-- script: |
-    cd Kwetter/ProfileService
-    docker build -t $(DOCKER_USER)/profileservice .
-    docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
-    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/profileservice
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
-  displayName: 'ProfileService'
-- script: |
-    cd Kwetter/UserService
-    docker build -t $(DOCKER_USER)/userservice .
-    docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
-    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/userservice
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
-  displayName: 'UserService'
-- script: |
-    cd Kwetter/MessageService
-    docker build -t $(DOCKER_USER)/messageservice .
-    docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
-    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/messageservice
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
-  displayName: 'MessageService'
-- script: |
-    cd Kwetter/AuthService
-    docker build -t $(DOCKER_USER)/authservice .
-    docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
-    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/authservice
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
-  displayName: 'AuthService'
-- script: |
-    cd Kwetter/OcelotAPIGateway
-    docker build -t $(DOCKER_USER)/gateway .
-    docker tag $(DOCKER_USER)/gateway $(DOCKER_USER)/gateway:$(Build.SourceVersion)
-    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
-    docker push $(DOCKER_USER)/gateway
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
-  displayName: 'OcelotAPIGateway'
+
+- task: AzureRmWebAppDeployment@4
+  displayName: "AuthService"
+  inputs:
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/AuthService/*/**/*.pubxml'
+- task: AzureRmWebAppDeployment@4
+  displayName: "OcelotAPIGateway"
+  inputs:
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/OcelotAPIGateway/*/**/*.pubxml'
+- task: AzureRmWebAppDeployment@4
+  displayName: "UserService"
+  inputs:
+    ConnectionType: 'PublishProfile'
+    PublishProfilePath: '$(System.DefaultWorkingDirectory)/Kwetter/UserService/*/**/*.pubxml'
