@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.1-sdk AS build
 WORKDIR /src
-COPY ["Kwetter/AuthService.csproj", "AuthService/"]
+COPY ["Kwetter/AuthService/AuthService.csproj", "AuthService/"]
 RUN dotnet restore "AuthService/AuthService.csproj"
 COPY . .
 WORKDIR "/src/AuthService"
