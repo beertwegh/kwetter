@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
+- master
 - dev
-
 pool:
   vmImage: 'windows-latest'
 
@@ -32,3 +32,43 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- script: |
+    cd ProfileService
+    docker build -t $(DOCKER_USER)/profileservice .
+    docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/profileservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
+  displayName: 'ProfileService'
+- script: |
+    cd UserService
+    docker build -t $(DOCKER_USER)/userservice .
+    docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/userservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
+  displayName: 'UserService'
+- script: |
+    cd MessageService
+    docker build -t $(DOCKER_USER)/messageservice .
+    docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/messageservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
+  displayName: 'MessageService'
+- script: |
+    cd AuthService
+    docker build -t $(DOCKER_USER)/authservice .
+    docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/authservice
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')  
+  displayName: 'AuthService'
+- script: |
+    cd OcelotAPIGateway
+    docker build -t $(DOCKER_USER)/gateway .
+    docker tag $(DOCKER_USER)/gateway $(DOCKER_USER)/gateway:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/gateway
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+  displayName: 'OcelotAPIGateway'
