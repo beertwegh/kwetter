@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
 COPY ["Kwetter/AuthService/AuthService.csproj", "AuthService/"]
 RUN dotnet restore "AuthService/AuthService.csproj"
-COPY . .
+
 WORKDIR "/src/AuthService"
 RUN dotnet build "AuthService.csproj" -c Release -o /app
 
