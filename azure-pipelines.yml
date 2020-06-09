@@ -22,10 +22,33 @@ steps:
 
 
 
-- script: |
-    
+- script: |    
     docker build -f AuthService -t $(DOCKER_USER)/authservice .
     docker tag $(DOCKER_USER)/authservice $(DOCKER_USER)/authservice:$(Build.SourceVersion)
     docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
     docker push $(DOCKER_USER)/authservice
   displayName: 'AuthService'
+- script: |    
+    docker build -f UserService -t $(DOCKER_USER)/userservice .
+    docker tag $(DOCKER_USER)/userservice $(DOCKER_USER)/userservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/userservice
+  displayName: 'UserService'
+- script: |    
+    docker build -f ProfileService -t $(DOCKER_USER)/profileservice .
+    docker tag $(DOCKER_USER)/profileservice $(DOCKER_USER)/profileservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/profileservice
+  displayName: 'ProfileService'
+- script: |    
+    docker build -f Gateway -t $(DOCKER_USER)/gatewayservice .
+    docker tag $(DOCKER_USER)/gatewayservice $(DOCKER_USER)/gatewayservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/gatewayservice
+  displayName: 'Gateway'
+- script: |    
+    docker build -f MessageService -t $(DOCKER_USER)/messageservice .
+    docker tag $(DOCKER_USER)/messageservice $(DOCKER_USER)/messageservice:$(Build.SourceVersion)
+    docker login -u $(DOCKER_USER) -p $(DOCKER_PASSWORD)
+    docker push $(DOCKER_USER)/messageservice
+  displayName: 'MessageService'
