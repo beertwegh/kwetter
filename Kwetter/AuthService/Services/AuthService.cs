@@ -25,6 +25,7 @@ namespace AuthService.Services
 
         public async Task<string> Authenticate(AuthUser authUser)
         {
+            
             var user = await _authRepo.ValidateAuthUser(authUser.Username, authUser.Password);
 
             // return null if user not found
