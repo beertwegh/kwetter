@@ -17,7 +17,7 @@ namespace UserService.Helpers.MessageBroker
             Task.Run(() =>
             {
 
-                var factory = new ConnectionFactory() { HostName = "localhost" };
+                var factory = new ConnectionFactory() { HostName = "10.12.3.98" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
@@ -40,7 +40,7 @@ namespace UserService.Helpers.MessageBroker
             Task.Run(() =>
             {
 
-                var factory = new ConnectionFactory() { HostName = "localhost" };
+                var factory = new ConnectionFactory() { HostName = "10.12.3.98" };
                 using (var connection = factory.CreateConnection())
                 using (var channel = connection.CreateModel())
                 {
