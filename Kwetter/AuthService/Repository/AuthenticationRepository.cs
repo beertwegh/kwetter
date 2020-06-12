@@ -21,14 +21,16 @@ namespace AuthService.Repository
 
         public async Task<AuthUser> ValidateAuthUser(string authUserUsername, string password)
         {
-            var user = await _authContext.AuthUsers.SingleOrDefaultAsync(u => u.Username == authUserUsername && u.Password == password);
-            return user;
+
+            var user = await _authContext.AuthUsers.SingleOrDefaultAsync(u => u.Username == authUserUsername);
+            return BCrypt.Net.BCrypt.Verify(password, user.Password) ? user : null;
         }
 
         public void SaveNewUser(AuthUser user)
         {
             try
             {
+                user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 _authContext.AuthUsers.Add(user);
                 _authContext.SaveChanges();
             }
